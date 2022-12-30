@@ -1,6 +1,6 @@
 @charset "UTF-8";
 body {
-  background-color: #11477d !important;
+  background-image: url('../../assets/background.png');
   margin: 8px;
 }
 
@@ -59,25 +59,30 @@ body {
 }
 
 .text-red {
-  color: #67a180;
+  color: #3b57f5;
 }
 
 
-.bigV {
+.bigF {
   align-self:flex-end;
 }
-.bigV::first-letter {
+.bigF::first-letter {
   font-size: 200%;
 }
 
 table {
   width: 100%;
   text-align: center;
-}
+} 
 
 
 .green {
   background-color: green;
+  border-radius: 5px;
+  color: white
+}
+.red {
+  background-color: rgba(194, 23, 23, 0.678);
   border-radius: 5px;
   color: white
 }

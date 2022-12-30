@@ -5,7 +5,7 @@ var input
 var answered = false
 
 fetch("player_data.json")
-    .then(response => response.json()).then(resp => {players=resp.players; answer= players[resp.answer]; day =resp.day}).then(_ =>{document.getElementsByClassName('bigV')[0].innerHTML += ` #${day}`})
+    .then(response => response.json()).then(resp => {players=resp.players; answer= players[resp.answer]; day =resp.day}).then(_ =>{document.getElementsByClassName('bigF')[0].innerHTML += ` #${day}`})
 
 
 var guesses = []
@@ -75,7 +75,7 @@ function play() {
             guesss.push(129001)
         } 
         else {
-            html = `<tr class="box"><td class="">${player[0]}</td>`
+            html = `<tr class="box"><td class=" red">${player[0]}</td>`
             guesss.push(0x2B1B)
         } 
 
@@ -85,65 +85,46 @@ function play() {
             html += `<td class=" green">${player[1]}</td>`
             guesss.push(129001) /* Green */
         }
-        else if (player[2] == answer[2]) {
-            html += `<td class=" yellow">${player[1]}</td>`
-            guesss.push(0x1F7E8)
-        }
         else {
-            html += `<td class="">${player[1]}</td>`
+            html += `<td class=" red">${player[1]}</td>`
             guesss.push(0x2B1B)
         }
 
-        if (player[3] == answer[3]) {
-            html += `<td class=" green">${player[3]}</td><td>`
+        if (player[2] == answer[2]) {
+            html += `<td class=" green">${player[2]}</td><td>`
             guesss.push(129001)
         } 
         else { 
-            html += `<td class="">${player[3]}</td><td>`
+            html += `<td class=" red">${player[2]}</td><td>`
             guesss.push(0x2B1B)
         }
-
         guesss.push(32)
 
-        player[4].map(
-            function (agent, i) {
-                if (answer[4][i] == agent) {
-                    html += `<img class=" border-green" src="assets/${agent}_icon.png">`
-                    guesss.push(129001)
-                }
-                else if (answer[4].includes(agent)) {
-                    html += `<img class=" border-yellow" src="assets/${agent}_icon.png">`
-                    guesss.push(0x1F7E8)
-                }
-                else {
-                    console.log('Unique agents')
-                    html += `<img class="border-4 " src="assets/${agent}_icon.png">`
-                    guesss.push(0x2B1B)
-                }
-            }
-        )
-
+        if (player[3]==answer[3]){
+            html += `<img class=" border-green" src="assets/correct_icon.png">`
+            html += '  <h3>' + player[4] + '</h3>'
+            guesss.push(129001)
+        }
+        else if(player[3]>answer[3]){
+            html += `<img class=" border-yellow" src="assets/toohigh_icon.jpeg">`
+            
+            html += '  <h3 class = " red">' + player[4] + '</h3>'
+            guesss.push(129001)
+        }
+        else{
+            html += `<img class=" border-yellow" src="assets/toolow_icon.png">`
+            html += '  <h3 class = " red">' + player[3] + '</h3>'
+            guesss.push(129001)
+        }
         guesss.push(32)
-        /* IGL */
-        if (answer[5] == player[5]) {
-            if (answer[5]) {
-                html += `<td class=" green">Is IGL</td>`
-                guesss.push(129001)
-            }
-            else {
-                html += `<td class=" green">Not IGL</td>`
-                guesss.push(129001)
-            }
+        /* grip */
+        if (answer[4] == player[4]) {
+            html += `<td class=" green">${player[4]}</td>`
+            guesss.push(129001) 
         }
         else {
-            if (player[5]) {
-                html += `<td class="">Is IGL</td>`
-                guesss.push(0x2B1B)
-            }
-            else {
-                html += `<td class="">Not IGL</td>`
-                guesss.push(0x2B1B)
-            }
+            html += `<td class=" red">${player[4]}</td>`
+            guesss.push(0x2B1B)
         }
         html += "</tr>"
         document.getElementById('data').innerHTML += html
@@ -170,5 +151,5 @@ function play() {
 }
 
 function copy_result() {
-    navigator.clipboard.writeText(`Fencordle #${day} ${answered ? guesses.length: '*'}/8\n\n` + guesses.join('\n') + '\n\nhttps://valorantle.melro5e.com')
+    navigator.clipboard.writeText(`Fencordle #${day} ${answered ? guesses.length: '*'}/8\n\n` + guesses.join('\n') + '\n\nhttps://fencordle.com')
 }

@@ -58,3 +58,6 @@ for team in teams:
 
 with open('player_data.json','w') as output:
     json.dump(data, output, indent=4)
+\
+
+
