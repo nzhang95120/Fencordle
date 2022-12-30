@@ -4,7 +4,7 @@ var day
 var input
 var answered = false
 
-fetch("player_data.json")
+fetch("fencers.json")
     .then(response => response.json()).then(resp => {players=resp.players; answer= players[resp.answer]; day =resp.day}).then(_ =>{document.getElementsByClassName('bigF')[0].innerHTML += ` #${day}`})
 
 
@@ -102,13 +102,13 @@ function play() {
 
         if (player[3]==answer[3]){
             html += `<img class=" border-green" src="assets/correct_icon.png">`
-            html += '  <h3>' + player[4] + '</h3>'
+            html += '  <h3 class = " green">' + player[3] + '</h3>'
             guesss.push(129001)
         }
         else if(player[3]>answer[3]){
             html += `<img class=" border-yellow" src="assets/toohigh_icon.jpeg">`
             
-            html += '  <h3 class = " red">' + player[4] + '</h3>'
+            html += '  <h3 class = " red">' + player[3] + '</h3>'
             guesss.push(129001)
         }
         else{
